@@ -1,0 +1,942 @@
+---
+title: "Quantile Regressions - 1994-2017"
+output:
+  html_document: default
+  html_notebook: default
+  pdf_document: default
+  word_document: default
+---
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(quantreg)
+setwd("/Users/whwilson/Desktop/R Files/Arrival Date Project")
+
+
+```
+
+Load dataset
+
+```{r}
+arr <- read.csv("/Users/whwilson/Desktop/R Files/Arrival Date Project/arrivals_1994_2017.csv")
+
+
+```
+
+Convert to date object, to Julian day and set Biophysical Regions to factors. Exclude 2017 data until NCDC temperature data are available.
+
+```{r}
+arr$date <- dmy(arr$Date)
+arr$doy <- yday(arr$date)
+arr$BioPhyReg <- as.factor(arr$BioPhyReg)
+arr <- arr %>%  filter(Year < 2017) %>% filter(doy>31)
+str(arr)
+```
+```{r}
+summary(arr)
+```
+Need to add temperature-departure data when 2017 March, April and May data are available
+
+```{r}
+sub <- arr %>% filter(Species == "Alder Flycatcher") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex, 
+c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "American Bittern") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "American Kestrel") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+
+
+
+```
+
+```{r}
+sub <- arr %>% filter(Species == "American Redstart") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "American Robin") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "American Woodcock") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Arctic Tern") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Baltimore Oriole") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Bank Swallow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Barn Swallow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Bay-breasted Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Belted Kingfisher") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Bicknell's Thrush") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Black Tern") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Black-and-white Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Black-billed Cuckoo") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Black-crowned Night-Heron") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Black-throated Blue Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Black-throated Green Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Blackburnian Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Blackpoll Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Blue-gray Gnatcatcher") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Blue-headed Vireo") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Blue-winged Teal") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Blue-winged Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Bobolink") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Broad-winged Hawk") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Brown Thrasher") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Brown-headed Cowbird") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Canada Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Cape May Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Chestnut-sided Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Chimney Swift") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Chipping Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Cliff Swallow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Common Grackle") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Common Loon") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Common Nighthawk") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Common Tern") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Common Yellowthroat") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Eastern Bluebird") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Eastern Kingbird") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Eastern Meadowlark") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Eastern Phoebe") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Eastern Towhee") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Eastern Wood-Pewee") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Field Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Fox Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Glossy Ibis") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Grasshopper Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Gray Catbird") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Gray-cheeked Thrush") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Great Blue Heron") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Great Crested Flycatcher") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Green Heron") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Green-winged Teal") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Hermit Thrush") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "House Wren") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Indigo Bunting") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Killdeer") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Least Flycatcher") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Least Tern") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Lincoln's Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Louisiana Waterthrush") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Magnolia Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Marsh Wren") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Mourning Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Nashville Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Nelson's Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Northern Flicker") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Northern Harrier") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+Removed Northern Mockingbird. Generates error
+```{r}
+
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Northern Parula") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Northern Rough-winged Swallow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Northern Waterthrush") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Olive-sided Flycatcher") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Orchard Oriole") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Osprey") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Ovenbird") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Palm Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Philadelphia Vireo") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Pied-billed Grebe") %>%  
+  filter(doy < median(doy) + 21)
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Pine Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Piping Plover") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Prairie Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Purple Martin") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Red-eyed Vireo") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Red-winged Blackbird") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+Remove late dates
+```{r}
+sub <- arr %>% filter(Species == "Red-winged Blackbird") %>% 
+  filter(doy < median(doy) + 21)
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Ring-necked Duck") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Rose-breasted Grosbeak") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Roseate Tern") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Ruby-crowned Kinglet") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Ruby-throated Hummingbird") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+Ruby-throated Hummingbird with late arrivals removed
+```{r}
+sub <- arr %>% filter(Species == "Ruby-throated Hummingbird") %>% 
+  filter(doy < median(doy) + 21)
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Rusty Blackbird") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Salt Marsh Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+Removed Sandhill Crane. Error generated
+```{r}
+
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Savannah Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Scarlet Tanager") %>% 
+  filter(doy < median(doy) + 21)
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Song Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Sora") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Spotted Sandpiper") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Swainson's Thrush") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Swamp Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Tennessee Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Tree Swallow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Turkey Vulture") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Upland Sandpiper") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Veery") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Vesper Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Virginia Rail") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Warbling Vireo") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Whip-poor-will") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "White-throated Sparrow") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Willet") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Willow Flycatcher") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Wilson's Snipe") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Wilson's Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Winter Wren") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Wood Duck") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Wood Thrush") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Yellow Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Yellow-bellied Flycatcher") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Yellow-bellied Sapsucker") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Yellow-billed Cuckoo") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Yellow-rumped Warbler") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
+```{r}
+sub <- arr %>% filter(Species == "Yellow-throated Vireo") 
+
+mod <- rq(sub$doy~sub$Year + sub$TempDepart + sub$NAOIndex,            tau = c(0.1,0.3,0.5))
+summary(mod, se = "boot")
+```
+
